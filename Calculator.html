@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js"></script>
     <script src="https://unpkg.com/number-to-words@1.2.4/numberToWords.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="calculator">
@@ -16,46 +18,32 @@
             </div>
             <div class="buttons">
                 <!-- Row 1 -->
-                <button class="btn special" data-key="sin">sin</button>
-                <button class="btn special" data-key="cos">cos</button>
-                <button class="btn special" data-key="tan">tan</button>
-                <button class="btn special" data-key="log">log</button>
-                <button class="btn special" data-key="ln">ln</button>
+                <button class="btn special" data-key="c">C</button>
+                <button class="btn special" data-key="Backspace">⌫</button>
+                <button class="btn operator" data-key="/">/</button>
+                <button class="btn operator" data-key="*">*</button>
 
                 <!-- Row 2 -->
-                <button class="btn special" data-key="(">(</button>
-                <button class="btn special" data-key=")">)</button>
-                <button class="btn special" data-key="mc">MC</button>
-                <button class="btn special" data-key="m+">M+</button>
-                <button class="btn special" data-key="m-">M-</button>
-                
-                <!-- Row 3 -->
                 <button class="btn" data-key="7">7</button>
                 <button class="btn" data-key="8">8</button>
                 <button class="btn" data-key="9">9</button>
-                <button class="btn operator" data-key="/">/</button>
-                <button class="btn operator" data-key="sqrt">√</button>
+                <button class="btn operator" data-key="-">-</button>
 
-                <!-- Row 4 -->
+                <!-- Row 3 -->
                 <button class="btn" data-key="4">4</button>
                 <button class="btn" data-key="5">5</button>
                 <button class="btn" data-key="6">6</button>
-                <button class="btn operator" data-key="*">*</button>
-                <button class="btn operator" data-key="^">x^y</button>
+                <button class="btn operator" data-key="+">+</button>
 
-                <!-- Row 5 -->
+                <!-- Row 4 -->
                 <button class="btn" data-key="1">1</button>
                 <button class="btn" data-key="2">2</button>
                 <button class="btn" data-key="3">3</button>
-                <button class="btn operator" data-key="-">-</button>
-                <button class="btn special" data-key="%">%</button>
-                
-                <!-- Row 6 -->
-                <button class="btn" data-key="0">0</button>
-                <button class="btn" data-key=".">.</button>
-                <button class="btn special" data-key="c">C</button>
-                <button class="btn operator" data-key="+">+</button>
                 <button class="btn operator" id="equals" data-key="=">=</button>
+
+                <!-- Row 5 -->
+                <button class="btn span-2" data-key="0">0</button>
+                <button class="btn" data-key=".">.</button>
             </div>
         </div>
         <div class="right-panel">
@@ -72,4 +60,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

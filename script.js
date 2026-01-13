@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         const key = e.key;
         let button;
-        
-        if(key === "Enter") {
+
+        if (key === "Enter") {
             e.preventDefault();
             button = document.getElementById('equals');
         } else if (key === "Backspace") {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             button = document.querySelector(`[data-key="${key}"]`);
         }
-        
+
         if (button) {
             button.click();
         }
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentInput = '';
             display.value = '';
         }
-        
+
         switch (key) {
             case '=':
                 calculate();
@@ -69,57 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentInput = currentInput.slice(0, -1);
                 display.value = currentInput;
                 break;
-            case 'mc':
-                memory = 0;
-                break;
-            case 'mr':
-                currentInput += memory;
-                display.value = currentInput;
-                break;
-            case 'm+':
-                try {
-                    memory += evaluate(currentInput) || 0;
-                } catch (error) {
-                    display.value = 'Error';
-                }
-                break;
-            case 'm-':
-                try {
-                    memory -= evaluate(currentInput) || 0;
-                } catch (error) {
-                    display.value = 'Error';
-                }
-                break;
-            case 'sqrt':
-                currentInput = `sqrt(${currentInput})`;
-                display.value = currentInput;
-                break;
-            case '^':
-                currentInput += '^(';
-                display.value = currentInput;
-                break;
-            case '%':
-                currentInput = `(${currentInput})/100`;
-                display.value = currentInput;
-                break;
-            case '!':
-                currentInput = `factorial(${currentInput})`;
-                display.value = currentInput;
-                break;
-            case '+-':
-                currentInput = `(-1 * ${currentInput})`;
-                display.value = currentInput;
-                break;
-             case 'sin':
-             case 'cos':
-             case 'tan':
-             case 'log':
-             case 'ln':
-                currentInput += `${key}(`;
+            case 'operator': // Handle +, -, *, /
+                // Prevent multiple operators in a row if needed, but for now just add
+                currentInput += value;
                 display.value = currentInput;
                 break;
             default:
-                currentInput += value;
+                // Check if it's a number or basic operator
+                if (['+', '-', '*', '/'].includes(key)) {
+                    currentInput += key;
+                } else {
+                    currentInput += value;
+                }
                 display.value = currentInput;
         }
     }
@@ -153,7 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
             hundred: 100, thousand: 1000, million: 1000000
         };
 
-        const parts = words.split(/[\s-]+/);
+        const cleanedWords = words.trim().toLowerCase();
+        if (cleanedWords === 'zero') return 0;
+
+        // Split by spaces, hyphens, or commas, and remove empty parts
+        const parts = cleanedWords.split(/[\s,-]+/).filter(part => part.length > 0);
         let total = 0;
         let currentNumber = 0;
 
@@ -169,6 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         total += currentNumber;
-        return total || 'Invalid input';
+        // If total is 0 but input wasn't "zero", it might be invalid or just empty. 
+        // But since we handled "zero" specifically above, 0 here implies failure to parse any numbers?
+        // Actually, if input is "garbage", total will be 0. We should probably return 'Invalid input' if 0 and cleanedWords !== 'zero'.
+        // Wait, "zero" case is handled. So if total is 0 here, it means no known words were found.
+        return (total === 0 && cleanedWords !== 'zero') ? 'Invalid input' : total;
     }
 });

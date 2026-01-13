@@ -69,7 +69,7 @@ body {
 
 .buttons {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
@@ -108,10 +108,17 @@ body {
     color: #000;
 }
 
-#equals {
+.span-2 {
     grid-column: span 2;
-    background-color: #4CAF50;
+    border-radius: 40px; 
+    /* Adjust border radius to look like a pill? 50px is circle-ish for squares. For a wide button, 50px is pill. */
+}
+
+#equals {
+    grid-row: span 2;
+    background-color: #ff9f0a;
     font-size: 1.5em;
+    height: 100%; /* Fill the height of two rows + gap */
 }
 
 .right-panel {
